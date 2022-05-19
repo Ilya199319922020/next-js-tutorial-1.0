@@ -3,7 +3,7 @@ export function Photo() {
 	return (
 		<>
 			<div>Photo</div>
-			<button></button>
+			<button>Далее</button>
 		</>
 	)
 }

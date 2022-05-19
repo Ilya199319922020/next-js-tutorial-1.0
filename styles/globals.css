@@ -10,6 +10,16 @@ a {
   color: inherit;
   text-decoration: none;
 }
+button {
+  width: 150px;
+	height: 40px; 
+  background: #1E6FB9;
+	border-radius: 5px;
+	color: #FFFFFF;
+	font-size: 18px;
+	cursor: pointer;
+  border: 0px solid ;
+}
 
 * {
   box-sizing: border-box;
