@@ -6,6 +6,8 @@ export function PersonalInfo({ setIsLogin }) {
 		setIsLogin(false)
 	}
 
+
+
 	return (
 		<>
 			<FormikControl control={'input'} type={'text'}
@@ -14,7 +16,7 @@ export function PersonalInfo({ setIsLogin }) {
 				placeholder={'Имя'} />
 			<FormikControl control={'input'} type={'text'}
 				placeholder={'Отчество'} name={'patronymic'} />
-			<button onClick={onIsLogin} >Далее</button>
+			<button type='submit' onClick={onIsLogin } >Далее</button>
 		</>
 
 	)

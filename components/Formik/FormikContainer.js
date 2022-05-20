@@ -8,7 +8,6 @@ import { Photo } from '../Photo';
 export default function FormikContainer() {
 	const [isLogin, setIsLogin] = useState(true);
 	const [isInfo, setIsInfo] = useState(true);
-
 	const initialValues = () => {
 		return (
 			{
@@ -22,10 +21,9 @@ export default function FormikContainer() {
 		)
 	};
 
-	const onSubmit = (values, onSubmitProps) => {
-		// const { login, password } = values;
-		// props.login(login, password);
-		// onSubmitProps.setSubmitting(false);
+
+	const onSubmit = (values) => {
+		console.log(values)
 	};
 
 	const validationSchema = () => Yup.object({
@@ -45,9 +43,10 @@ export default function FormikContainer() {
 			{formik => {
 				return (
 					<Form >
-						{isLogin ? <PersonalInfo setIsLogin={setIsLogin} />
+						{isLogin ? <PersonalInfo  setIsLogin={setIsLogin} />
 							: isInfo ? <ContactInfo setIsInfo={setIsInfo} />
 								: <Photo />}
+						
 					</Form>)
 			}
 			}
