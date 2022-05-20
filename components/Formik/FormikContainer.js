@@ -8,6 +8,7 @@ import { Photo } from '../Photo';
 export default function FormikContainer() {
 	const [isLogin, setIsLogin] = useState(true);
 	const [isInfo, setIsInfo] = useState(true);
+	
 	const initialValues = () => {
 		return (
 			{
@@ -26,6 +27,7 @@ export default function FormikContainer() {
 		console.log(values)
 	};
 
+
 	const validationSchema = () => Yup.object({
 		surname: Yup.string().required('заполните поле'),
 		firstname: Yup.string().required('заполните поле'),
@@ -34,19 +36,22 @@ export default function FormikContainer() {
 		email: Yup.string().required('заполните поле'),
 		photo: ''
 	})
+
+
 	return (
 		<Formik
 			initialValues={initialValues}
 			onSubmit={onSubmit}
 			validationSchema={validationSchema}
+			enableReinitialize
 		>
 			{formik => {
 				return (
 					<Form >
-						{isLogin ? <PersonalInfo  setIsLogin={setIsLogin} />
+						{isLogin ? <PersonalInfo setIsLogin={setIsLogin} />
 							: isInfo ? <ContactInfo setIsInfo={setIsInfo} />
 								: <Photo />}
-						
+
 					</Form>)
 			}
 			}
