@@ -7,7 +7,6 @@ import profilePic from '../../public/name.png';
 import styles from '../../styles/FormContainer.module.scss'
 
 export default function FormikContainer() {
-
 	return (
 		<FormikStepper>
 			<FormikStep validationSchema={Yup.object({
@@ -15,54 +14,73 @@ export default function FormikContainer() {
 				firstname: Yup.string().required('заполните поле'),
 				patronymic: Yup.string().required('заполните поле'),
 			})}>
-				<FormikControl control={'input'} type={'text'}
-					placeholder={'Фамилия'} name={'surname'} />
-				<FormikControl name={'firstname'} control={'input'} type={'text'}
-					placeholder={'Имя'} />
-				<FormikControl control={'input'} type={'text'}
-					placeholder={'Отчество'} name={'patronymic'} />
+				<FormikControl
+					control={'input'}
+					type={'text'}
+					placeholder={'Фамилия'}
+					name={'surname'}
+				/>
+				<FormikControl
+					control={'input'}
+					name={'firstname'}
+					type={'text'}
+					placeholder={'Имя'}
+				/>
+				<FormikControl
+					control={'input'}
+					type={'text'}
+					placeholder={'Отчество'}
+					name={'patronymic'}
+				/>
 			</FormikStep >
-
-			<FormikStep validationSchema={Yup.object().shape({
-
-				phone: Yup.string()
-					.matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
-						message: "неправильная валидация номера",
-						excludeEmptyString: false,
-					})
-					.when('email', {
-						is: (email) => !email || email.length === 0,
-						then: Yup.string().required('заполните поле')
-							.matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
-								message: "неправильная валидация номера",
-								excludeEmptyString: false,
-							})
-					}),
-				email: Yup.string().email('неправильная валидация email')
-					.when('phone', {
-						is: (phone) => !phone || phone.length === 0,
-						then: Yup.string().email('неправильная валидация email').required('заполните поле')
-					}),
-			}, ['phone', 'email'])}>
-				<FormikControl control={'input'} type={'phone'}
-					placeholder={'+7 (999) 999 99 99'} name={'phone'} />
-				<FormikControl name={'email'} control={'input'} type={'email'}
-					placeholder={'email@example.com'} />
+			<FormikStep
+				validationSchema={Yup.object().shape({
+					phone: Yup.string()
+						.matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
+							message: "неправильная валидация номера",
+							excludeEmptyString: false,
+						})
+						.when('email', {
+							is: (email) => !email || email.length === 0,
+							then: Yup.string().required('заполните поле')
+								.matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
+									message: "неправильная валидация номера",
+									excludeEmptyString: false,
+								})
+						}),
+					email: Yup.string().email('неправильная валидация email')
+						.when('phone', {
+							is: (phone) => !phone || phone.length === 0,
+							then: Yup.string().email('неправильная валидация email').required('заполните поле'),
+						}),
+				}, ['phone', 'email'])}
+			>
+				<FormikControl
+					control={'phoneInput'}
+					name={'phone'}
+					type={'phone'}		
+				/>
+				<FormikControl
+					control={'input'}
+					name={'email'}
+					type={'email'}
+					placeholder={'email@example.com'}
+				/>
 			</FormikStep>
-
-			<FormikStep validationSchema={Yup.object({
-				photo: ''
-			})}>
+			<FormikStep
+				validationSchema={Yup.object({ photo: '' })}
+			>
 				<Image src={profilePic} />
-				<FormikControl control={'input'} type={'file'}
-					name={'photo'} placeholder={'photo'} />
+				<FormikControl
+					control={'input'}
+					type={'file'}
+					name={'photo'}
+					placeholder={'photo'}
+				/>
 			</FormikStep>
-
 		</FormikStepper>
 	);
 };
-
-
 
 export function FormikStep({ children }) {
 	return <>{children}</>
@@ -97,22 +115,24 @@ export function FormikStepper({ children, ...props }) {
 			}
 		);
 	};
-	
+
 	return (<>
 		<Stepper step={step} />
-		<Formik {...props}
+		<Formik
+			{...props}
 			initialValues={initialValues}
 			validationSchema={currentChild.props.validationSchema}
-
 			onSubmit={async (values, helpers) => {
 				if (step === childrenArray.length - 1) {
 					await props.onSubmit(values, helpers)
 				} else {
 					setStep(s => s + 1);
 				}
-			}}>
-			<Form autoComplete='off'>
-
+			}}
+		>
+			<Form
+				autoComplete='off'
+			>
 				{currentChild}
 				<button type='submit'>Далее</button>
 			</Form>
