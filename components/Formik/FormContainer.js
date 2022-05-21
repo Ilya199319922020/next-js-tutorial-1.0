@@ -3,7 +3,8 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import FormikControl from './FormikControl';
 import Image from 'next/image';
-import profilePic from '../../public/name.png'
+import profilePic from '../../public/name.png';
+import styles from '../../styles/FormContainer.module.scss'
 
 export default function FormikContainer() {
 
@@ -22,10 +23,27 @@ export default function FormikContainer() {
 					placeholder={'Отчество'} name={'patronymic'} />
 			</FormikStep >
 
-			<FormikStep validationSchema={Yup.object({
-				phone: Yup.string().email('неправильная валидация email').required('заполните поле'),
-				email: Yup.string().required('заполните поле'),
-			})}>
+			<FormikStep validationSchema={Yup.object().shape({
+
+				phone: Yup.string()
+					.matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
+						message: "неправильная валидация номера",
+						excludeEmptyString: false,
+					})
+					.when('email', {
+						is: (email) => !email || email.length === 0,
+						then: Yup.string().required('заполните поле')
+							.matches(/(\+91\ )[6-9]{1}[0-9 ]{4}[0-9 ]{4}[0-9]{3}/, {
+								message: "неправильная валидация номера",
+								excludeEmptyString: false,
+							})
+					}),
+				email: Yup.string().email('неправильная валидация email')
+					.when('phone', {
+						is: (phone) => !phone || phone.length === 0,
+						then: Yup.string().email('неправильная валидация email').required('заполните поле')
+					}),
+			}, ['phone', 'email'])}>
 				<FormikControl control={'input'} type={'phone'}
 					placeholder={'+7 (999) 999 99 99'} name={'phone'} />
 				<FormikControl name={'email'} control={'input'} type={'email'}
@@ -50,6 +68,17 @@ export function FormikStep({ children }) {
 	return <>{children}</>
 };
 
+export function Stepper({ step }) {
+	return (
+		<div className={styles.stepper}>
+			<ul className={styles.progressBar}>
+				<li className={step >= 0 ? styles.active : ''}></li>
+				<li className={step >= 1 ? styles.active : ''}></li>
+				<li className={step >= 2 ? styles.active : ''}></li>
+			</ul>
+		</div>
+	);
+};
 
 export function FormikStepper({ children, ...props }) {
 	const childrenArray = React.Children.toArray(children);
@@ -68,8 +97,9 @@ export function FormikStepper({ children, ...props }) {
 			}
 		);
 	};
-
-	return (
+	
+	return (<>
+		<Stepper step={step} />
 		<Formik {...props}
 			initialValues={initialValues}
 			validationSchema={currentChild.props.validationSchema}
@@ -82,8 +112,11 @@ export function FormikStepper({ children, ...props }) {
 				}
 			}}>
 			<Form autoComplete='off'>
+
 				{currentChild}
 				<button type='submit'>Далее</button>
 			</Form>
-		</Formik>);
+		</Formik>
+	</>);
 };
+
