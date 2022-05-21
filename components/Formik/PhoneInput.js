@@ -1,26 +1,30 @@
 import React from 'react';
-import { Field, ErrorMessage, } from 'formik';
+import { Field, ErrorMessage, useFormikContext } from 'formik';
 import TextError from './TextError';
 import InputMask from 'react-input-mask';
 
 
 export default function PhoneInput({ placeholder, name, ...props }) {
+	const { setFieldValue } = useFormikContext();
 	return (
 		<div className={'form-control'}>
 			<Field
 				name={name}
 				id={name}
-				render={(field) => (
-					<InputMask
-						{...field}
-						mask="+7\ (999) 999-9999"
-						placeholder="Номер телефона"
-						type="text"
-						alwaysShowMask="true"
-					/>
-				)}
 				{...props}
-			/>
+			>
+				{() => {
+					return (
+						<InputMask
+							mask="+7\ (999) 999-99-99"
+							placeholder="Номер телефона"
+							type="text"
+							alwaysShowMask="true"
+							onBlur={(e) => { setFieldValue('phone', e.target.value.replace(/\D/g, '')) }}
+						/>
+					);
+				}}
+			</Field>
 			<ErrorMessage
 				name={name} component={TextError}
 			/>

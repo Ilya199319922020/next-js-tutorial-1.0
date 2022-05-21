@@ -4,12 +4,12 @@
 	.progressBar {
 		display: flex;
 		width: 350px;
-		justify-content: space-around;
+		justify-content: space-evenly;
 		padding: 0;
 
 		li {
 			border: 0px solid rgb(44, 120, 196);
-			width: 80px;
+			width: 90px;
 			height: 5px;
 			background-color: rgb(88, 118, 148);
 			border-radius: 4px;
