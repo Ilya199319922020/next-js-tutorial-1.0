@@ -1,4 +1,4 @@
-import FormContainer from "../../components/Formik/FormContainer";
+import FormData from "../../components/Form/FormData";
 import MainLayout from "../../components/MainLayout";
 import styles from '../../styles/Home.module.scss';
 
@@ -8,11 +8,9 @@ export default function Home() {
 		<MainLayout >
 			<div className={styles.container}>
 				<div className={styles.container__header} >
-					{/* <ProgressBar isLogin={isLogin} isInfo={isInfo} /> */}
 				</div>
 				<div>
-					{/* <FormikContainer /> */}
-					<FormContainer/>
+					<FormData />
 				</div>
 			</div>
 		</MainLayout>

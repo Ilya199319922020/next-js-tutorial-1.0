@@ -1,6 +1,7 @@
 .stepper {
 	position: fixed;
 	top: 8.5%;
+
 	.progressBar {
 		display: flex;
 		width: 350px;
@@ -14,11 +15,19 @@
 			background-color: rgb(88, 118, 148);
 			border-radius: 4px;
 
-
 		}
 
 		.active {
 			background-color: rgb(244, 245, 248)
 		}
+
+		.animation {
+			background-position: left;
+			background: linear-gradient(to left, rgb(252, 252, 252) 50%, rgb(88, 118, 148) 50%) right;
+			background-size: 200%;
+			transition: .5s ease-out;
+		}
+
+		.animation {}
 	}
 }
