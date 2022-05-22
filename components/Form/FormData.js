@@ -2,35 +2,35 @@ import React, { useState } from 'react';
 import FormikControl from './FormikControl';
 import styles from '../../styles/FormContainer.module.scss';
 import { Formik, Form } from 'formik';
-
 import { Stepper } from '../../assets/utils/stepper';
 import { validateSchema } from '../../assets/Consts';
-
 
 export default function FormData() {
 
 	return (
 		<FormikStepper>
+
 			<FormikStep
 				validationSchema={validateSchema.personal}
 			>
 				<FormikControl
 					control={'input'}
 					type={'text'}
-					placeholder={'Фамилия'}
 					name={'surname'}
+					placeholder={'Фамилия'}
+
 				/>
 				<FormikControl
 					control={'input'}
-					name={'firstname'}
 					type={'text'}
+					name={'firstname'}
 					placeholder={'Имя'}
 				/>
 				<FormikControl
 					control={'input'}
 					type={'text'}
-					placeholder={'Отчество'}
 					name={'patronymic'}
+					placeholder={'Отчество'}
 				/>
 			</FormikStep >
 
@@ -39,13 +39,13 @@ export default function FormData() {
 			>
 				<FormikControl
 					control={'phoneInput'}
-					name={'phone'}
 					type={'phone'}
+					name={'phone'}
 				/>
 				<FormikControl
 					control={'input'}
-					name={'email'}
 					type={'email'}
+					name={'email'}
 					placeholder={'email@example.com'}
 				/>
 			</FormikStep>
@@ -88,7 +88,6 @@ function FormikStepper({ children, ...props }) {
 	};
 
 	const onSubmit = async (values, helpers) => {
-		console.log(values)
 		if (step === childrenArray.length - 1) {
 			await props.onSubmit(values, helpers);
 		} else {
@@ -105,11 +104,9 @@ function FormikStepper({ children, ...props }) {
 			initialValues={initialValues}
 			validationSchema={currentChild.props.validationSchema}
 			onSubmit={onSubmit}
-			currentChild
 		>
 			<Form
 				autoComplete='off'
-
 			>
 				<div className={styles.form}>
 					<div className={styles.form__container}>
@@ -125,7 +122,6 @@ function FormikStepper({ children, ...props }) {
 					<button type='submit'>
 						Далее
 					</button>
-
 				</div>
 			</Form>
 		</Formik>

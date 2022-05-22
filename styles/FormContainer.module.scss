@@ -27,14 +27,20 @@
 		input::placeholder {
 			font-size: 14px;
 			padding: 7px;
-
 		}
 
+		.form__container_photo {
+			display: flex;
+			justify-content: center;
+
+			img {
+				border-radius: 50%;
+				margin: 0 auto;
+				cursor: pointer;
+			}
+		}
 	}
-
-	
 }
-
 
 //Анимация переходов
 $bc: rgb(162, 185, 207);
@@ -55,7 +61,6 @@ $bc: rgb(162, 185, 207);
 			height: 4px;
 			background-color: $bc;
 			border-radius: 4px;
-
 		}
 
 		.active {
@@ -68,6 +73,5 @@ $bc: rgb(162, 185, 207);
 			background-size: 200%;
 			transition: .5s ease-out;
 		}
-
 	}
 }

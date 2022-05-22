@@ -1,7 +1,8 @@
+import styles from '../../styles/ErrorValidation.module.scss';
 
 export default function TextError(props) {
 	return (
-		<div className={'error'}>
+		<div className={styles.error}>
 			{props.children}
 		</div>
 	)
