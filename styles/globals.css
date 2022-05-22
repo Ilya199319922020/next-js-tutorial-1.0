@@ -10,15 +10,17 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
 button {
-  width: 150px;
-	height: 40px; 
-  background: #1E6FB9;
-	border-radius: 5px;
-	color: #FFFFFF;
-	font-size: 18px;
-	cursor: pointer;
-  border: 0px solid ;
+  width: 310px;
+  height: 40px;
+  background: rgb(99, 119, 184);
+  border-radius: 3px;
+  color: #FFFFFF;
+  font-weight: 400;
+	font-size: 14px;
+  cursor: pointer;
+  border: 0px solid;
 }
 
 * {
@@ -26,5 +28,5 @@ button {
 }
 
 ul li {
-	list-style: none;
+  list-style: none;
 }

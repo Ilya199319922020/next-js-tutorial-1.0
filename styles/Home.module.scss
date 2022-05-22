@@ -1,12 +1,25 @@
-.container{
-	.container__header{
-		background-color: rgb(68, 90, 163);
-		width: 350px;
-		height: 60px;
-
+.container {
+	.container__header {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
+		border-radius: 4px 4px 0 0;
+		background-color: rgb(99, 119, 184);
+		width: 350px;
+		height: 60px;
+		position: relative;
+
+		.container__header_loadingIndikator {
+			position: absolute;
+			top: 0;
+			background-color: rgb(162, 185, 207);
+			width: 350px;
+			height: 4px;
+		}
+	}
+
+	.container__form {
+		display: flex;
+		justify-content: center;
 	}
 }

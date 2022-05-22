@@ -1,17 +1,16 @@
-import React, { useRef, useState } from 'react'
-import { Formik, Form } from 'formik';
+import React, { useState } from 'react';
 import FormikControl from './FormikControl';
-import Image from 'next/image';
-import profilePic from '../../assets/image/name.png';
 import styles from '../../styles/FormContainer.module.scss';
+import { Formik, Form } from 'formik';
+
 import { Stepper } from '../../assets/utils/stepper';
 import { validateSchema } from '../../assets/Consts';
+
 
 export default function FormData() {
 
 	return (
 		<FormikStepper>
-
 			<FormikStep
 				validationSchema={validateSchema.personal}
 			>
@@ -58,7 +57,6 @@ export default function FormData() {
 					control={'photoInput'}
 					name={'photo'}
 				/>
-
 			</FormikStep>
 
 		</FormikStepper>
@@ -71,7 +69,7 @@ function FormikStep({ children }) {
 	</>
 };
 
-function FormikStepper({ children, setFieldValue, ...props }) {
+function FormikStepper({ children, ...props }) {
 	const childrenArray = React.Children.toArray(children);
 	const [step, setStep] = useState(0);
 	const currentChild = childrenArray[step];
@@ -90,7 +88,7 @@ function FormikStepper({ children, setFieldValue, ...props }) {
 	};
 
 	const onSubmit = async (values, helpers) => {
-		// console.log(values)
+		console.log(values)
 		if (step === childrenArray.length - 1) {
 			await props.onSubmit(values, helpers);
 		} else {
@@ -107,12 +105,28 @@ function FormikStepper({ children, setFieldValue, ...props }) {
 			initialValues={initialValues}
 			validationSchema={currentChild.props.validationSchema}
 			onSubmit={onSubmit}
+			currentChild
 		>
 			<Form
 				autoComplete='off'
+
 			>
-				{currentChild}
-				<button type='submit'>Далее</button>
+				<div className={styles.form}>
+					<div className={styles.form__container}>
+						{
+							step === 0
+								? <b>Личная информация</b>
+								: step === 1
+									? <b>контактная информация</b>
+									: <b>Фотография</b>
+						}
+						{currentChild}
+					</div>
+					<button type='submit'>
+						Далее
+					</button>
+
+				</div>
 			</Form>
 		</Formik>
 	</>);

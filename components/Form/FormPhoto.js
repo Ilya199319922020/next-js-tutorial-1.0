@@ -3,13 +3,12 @@ import { Field, ErrorMessage, useFormikContext } from 'formik';
 import profilePic from '../../assets/image/name.png';
 import TextError from "./TextError";
 
-export default function PhotoInput({ name }) {
+export default function FormPhoto({ name }) {
 	const { setFieldValue } = useFormikContext();
 
 	const handleChange = function loadFile(event) {
 		if (event.target.files.length > 0) {
 			const file = event.target.files[0];
-			console.log(file);
 			setFieldValue(file);
 		}
 	};

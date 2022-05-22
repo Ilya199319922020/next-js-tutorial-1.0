@@ -1,6 +1,47 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 450px;
+
+	.form__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		height: 200px;
+		margin-top: 20px;
+
+		b {
+			font-size: 14px;
+			font-weight: 400;
+		}
+
+		input {
+			height: 35px;
+			width: 310px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+			font-size: 14px;
+		}
+
+		input::placeholder {
+			font-size: 14px;
+			padding: 7px;
+
+		}
+
+	}
+
+	
+}
+
+
+//Анимация переходов
+$bc: rgb(162, 185, 207);
+
 .stepper {
 	position: fixed;
-	top: 8.5%;
+	top: 9%;
 
 	.progressBar {
 		display: flex;
@@ -10,9 +51,9 @@
 
 		li {
 			border: 0px solid rgb(44, 120, 196);
-			width: 90px;
-			height: 5px;
-			background-color: rgb(88, 118, 148);
+			width: 95px;
+			height: 4px;
+			background-color: $bc;
 			border-radius: 4px;
 
 		}
@@ -23,11 +64,10 @@
 
 		.animation {
 			background-position: left;
-			background: linear-gradient(to left, rgb(252, 252, 252) 50%, rgb(88, 118, 148) 50%) right;
+			background: linear-gradient(to left, rgb(252, 252, 252) 50%, $bc 50%) right;
 			background-size: 200%;
 			transition: .5s ease-out;
 		}
 
-		.animation {}
 	}
 }

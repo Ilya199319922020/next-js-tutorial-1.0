@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from './Input';
 import PhoneInput from './PhoneInput';
-import PhotoInput from './PhotoInput';
+import FormPhoto from './FormPhoto';
 
 export default function FormikControl({ control, ...props }) {
 	switch (control) {
@@ -10,7 +10,7 @@ export default function FormikControl({ control, ...props }) {
 		case 'phoneInput':
 			return <PhoneInput {...props} />
 			case 'photoInput':
-			return <PhotoInput {...props} />
+			return <FormPhoto {...props} />
 
 		default: return null
 	};
