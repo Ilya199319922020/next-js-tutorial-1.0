@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Formik, Form } from 'formik';
 import FormikControl from './FormikControl';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import { Stepper } from '../../assets/utils/stepper';
 import { validateSchema } from '../../assets/Consts';
 
 export default function FormData() {
+
 	return (
 		<FormikStepper>
 
@@ -53,12 +54,9 @@ export default function FormData() {
 			<FormikStep
 				validationSchema={validateSchema.photo}
 			>
-				<Image src={profilePic} />
 				<FormikControl
-					control={'input'}
+					control={'photoInput'}
 					name={'photo'}
-					type={'file'}
-					placeholder={'photo'}
 				/>
 
 			</FormikStep>
@@ -69,7 +67,7 @@ export default function FormData() {
 
 function FormikStep({ children }) {
 	return <>
-	{children}
+		{children}
 	</>
 };
 
@@ -92,7 +90,7 @@ function FormikStepper({ children, setFieldValue, ...props }) {
 	};
 
 	const onSubmit = async (values, helpers) => {
-
+		// console.log(values)
 		if (step === childrenArray.length - 1) {
 			await props.onSubmit(values, helpers);
 		} else {
