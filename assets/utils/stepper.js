@@ -1,7 +1,6 @@
-import styles from '../../styles/FormContainer.module.scss'
+import styles from '../../styles/Form.module.scss'
 
 export function Stepper({ step }) {
-
 	return (
 		<div className={styles.stepper}>
 			<ul className={styles.progressBar}>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Field, ErrorMessage, useFormikContext } from 'formik';
 import profilePic from '../../assets/image/ava.jpg';
 import TextError from "./TextError";
-import styles from '../../styles/FormContainer.module.scss';
+import styles from '../../styles/Form.module.scss';
 
 export default function FormPhoto({ name }) {
 	const { setFieldValue } = useFormikContext();
@@ -11,14 +11,13 @@ export default function FormPhoto({ name }) {
 		if (event.target.files.length > 0) {
 			const file = event.target.files[0];
 			setFieldValue(file);
-			console.log(file)
 		}
 	};
 	return (
 		<div >
 			<Field name={name}
 				type="file"
-				onChange={handleChange}
+				onBlur={handleChange}
 				id="upload"
 				style={{ display: "none" }}
 			/>

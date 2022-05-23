@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FormikControl from './FormikControl';
-import styles from '../../styles/FormContainer.module.scss';
+import styles from '../../styles/Form.module.scss';
 import { Formik, Form } from 'formik';
 import { Stepper } from '../../assets/utils/stepper';
 import { validateSchema } from '../../assets/Consts';
@@ -10,7 +10,6 @@ export default function FormData() {
 
 	return (
 		<FormikStepper>
-
 			<FormikStep
 				validationSchema={validateSchema.personal}
 			>
@@ -19,7 +18,6 @@ export default function FormData() {
 					type={'text'}
 					name={'surname'}
 					placeholder={'Фамилия'}
-
 				/>
 				<FormikControl
 					control={'input'}
@@ -34,7 +32,6 @@ export default function FormData() {
 					placeholder={'Отчество'}
 				/>
 			</FormikStep >
-
 			<FormikStep
 				validationSchema={validateSchema.contact}
 			>
@@ -50,17 +47,14 @@ export default function FormData() {
 					placeholder={'email@example.com'}
 				/>
 			</FormikStep>
-
 			<FormikStep
 				validationSchema={validateSchema.photo}
 			>
 				<FormikControl
 					control={'photoInput'}
 					name={'photo'}
-
 				/>
 			</FormikStep>
-
 		</FormikStepper>
 	);
 };
@@ -76,7 +70,7 @@ function FormikStepper({ children, ...props }) {
 	const [step, setStep] = useState(0);
 	const currentChild = childrenArray[step];
 	const [message, setMessage] = useState(null);
-	const router = useRouter()
+	const router = useRouter();
 
 	const initialValues = () => {
 		return (
@@ -100,7 +94,8 @@ function FormikStepper({ children, ...props }) {
 			}
 		});
 		const data = await response.json();
-		setMessage(data);
+		setMessage(data.status);
+
 	};
 
 	const onSubmit = (values, helpers) => {
@@ -112,49 +107,51 @@ function FormikStepper({ children, ...props }) {
 	};
 
 	useEffect(() => {
-		if (message) {
+		if (message === 1) {
 			router.push('/infoPage');
 		}
 	}, [message]);
 
 	return (
 		<>
-			<Stepper
-				step={step}
-			/>
 			<Formik
 				{...props}
 				initialValues={initialValues}
 				validationSchema={currentChild.props.validationSchema}
 				onSubmit={onSubmit}
 			>
-				{formik => {
-					return (
-						<Form autoComplete='off'>
-							<div className={styles.form}>
-								<div className={styles.form__container}>
-									{
-										step === 0
-											? <b>Личная информация</b>
-											: step === 1
-												? <b>Контактная информация</b>
-												: <b>Фотография</b>
-									}
-									{currentChild}
-								</div>
-								<button
-									disabled={!formik.isValid}
-									type='submit'
-								>
-									Далее
-								</button>
-							</div>
-						</Form>
-					)
-				}}
+				<Form autoComplete='off'>
+					<div className={styles.form}>
+						<Stepper
+							step={step}
+						/>
+						<div className={styles.form__container}>
+							<HeaderText
+								step={step}
+							/>
+							{currentChild}
+						</div>
+						<button type='submit'>
+							Далее
+						</button>
+					</div>
+				</Form>
 			</Formik>
 		</>
 	);
 
 };
 
+function HeaderText({ step }) {
+	return (
+		<>
+			{
+				step === 0
+					? <b>Личная информация</b>
+					: step === 1
+						? <b>Контактная информация</b>
+						: <b>Фотография</b>
+			}
+		</>
+	);
+};
