@@ -9,8 +9,8 @@ export default function MainLayout({ children }) {
 					Form Page
 				</title>
 			</Head>
-			<main
-				className={style.mainLayout__item}>{children}
+			<main className={style.mainLayout__item}>
+					{children}
 			</main>
 		</div>
 	);

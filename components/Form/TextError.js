@@ -5,5 +5,5 @@ export default function TextError(props) {
 		<div className={styles.error}>
 			{props.children}
 		</div>
-	)
-}
+	);
+};

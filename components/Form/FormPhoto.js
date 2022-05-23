@@ -11,19 +11,26 @@ export default function FormPhoto({ name }) {
 		if (event.target.files.length > 0) {
 			const file = event.target.files[0];
 			setFieldValue(file);
+			console.log(file)
 		}
 	};
 	return (
 		<div >
-			<Field name={name} type="file" onChange={handleChange} id="upload" accept="image/*" style={{ display: "none" }} />
+			<Field name={name}
+				type="file"
+				onChange={handleChange}
+				id="upload"
+				style={{ display: "none" }}
+			/>
 			<label htmlFor="upload">
-				{<div className={styles.form__container_photo}>
-					<Image
-						width={100}
-						height={100}
-						border-radius={50}
-						src={profilePic}
-					/>
+				{
+					<div className={styles.form__container_photo}>
+						<Image
+							width={100}
+							height={100}
+							border-radius={50}
+							src={profilePic}
+						/>
 					</div>
 				}
 			</label>
@@ -34,3 +41,4 @@ export default function FormPhoto({ name }) {
 		</div>
 	);
 };
+

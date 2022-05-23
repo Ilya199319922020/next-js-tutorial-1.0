@@ -30,3 +30,7 @@ button {
 ul li {
   list-style: none;
 }
+
+.message{
+  margin: 0 auto;
+}

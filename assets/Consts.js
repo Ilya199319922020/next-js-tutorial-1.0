@@ -22,5 +22,5 @@ export const validateSchema = {
 			}),
 	}, ['phone', 'email']),
 
-	photo: Yup.object({ photo: '' }),
+	photo: Yup.object().required('файл обязателен для загрузки'),
 };
